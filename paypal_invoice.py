@@ -32,7 +32,10 @@ from datetime import date, timedelta
 import requests
 from requests.auth import HTTPBasicAuth
 
-SANDBOX_BASE = "https://api-m.sandbox.paypal.com"
+# PAYPAL_BASE_URL overrides the sandbox endpoint for local testing, e.g.
+# PAYPAL_BASE_URL=http://127.0.0.1:5001 runs this same code against the mock
+# PayPal server (see mock_paypal_server.py). Unset = real PayPal sandbox.
+SANDBOX_BASE = os.environ.get("PAYPAL_BASE_URL") or "https://api-m.sandbox.paypal.com"
 LIVE_BASE = "https://api-m.paypal.com"
 
 # Well-known PayPal payer-view URL pattern (the same URL PayPal puts in its
